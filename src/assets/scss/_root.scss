@@ -34,6 +34,8 @@
     --#{$prefix}#{$color}-border-subtle: #{$value};
   }
 
+  
+
   --#{$prefix}white-rgb: #{to-rgb($white)};
   --#{$prefix}black-rgb: #{to-rgb($black)};
 

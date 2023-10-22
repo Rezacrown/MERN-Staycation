@@ -51,10 +51,12 @@
 // scss-docs-end import-stack
 
 // my custom
+// @import "utilities/text";
+
 .brand-text-icon {
     font-size: 26px;
     font-weight: 500;
-    font-family: "Poppins" sans-serif;
+    font-family: "Poppins", sans-serif;
     color: $primary;
     text-decoration: none;
 
@@ -83,5 +85,11 @@ header {
             color: $primary !important;
         }
     }
+}
 
+.text-gray-500 {
+    color: $gray-500;
+}
+.text-gray-900 {
+    color: $gray-900;
 }

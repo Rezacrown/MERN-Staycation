@@ -801,9 +801,18 @@ $utilities: map-merge(
       values: $zindex-levels,
     )
     // scss-docs-end utils-zindex
+
+  
+    
   ),
   $utilities
 );
+
+
+// @each $color, $value in $grays {
+//   @include text-emphasis-variant(".text-gray-#{$color}", $value, true);
+// }
+
 
 
 
