@@ -1,5 +1,5 @@
 // import { render, screen } from "@testing-library/react";
-import { describe, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { render } from "@testing-library/react";
 import Button from "./index";
 
@@ -54,4 +54,18 @@ describe("Button components", () => {
   });
 
   //
+});
+
+describe("Type Link Buttton", () => {
+  //
+  it("is a Link and have property to in inside element", () => {
+    // const {container} = render(
+    //     <Button type="link">Link</Button>
+    // );
+
+    // const element = container.querySelector('a');
+
+    // debug(element)
+    expect(<Button type="link">Link</Button>).toHaveProperty(["type"]);
+  });
 });

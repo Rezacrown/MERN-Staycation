@@ -1,11 +1,10 @@
-import Button from "@/components/Button";
+import Header from "@/components/Header";
 
-export default function LandingPage() {
+export default function LandingPage(props: any) {
   return (
-    <div className=" ">
-      <Button isPrimary className="btn-success">
-        click
-      </Button>
-    </div>
+    <>
+      <Header pathname="/" {...props} />
+
+    </>
   );
 }

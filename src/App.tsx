@@ -1,17 +1,18 @@
-import './assets/scss/style.scss'
+import "./assets/scss/style.scss";
+// import "react-bootstrap";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import LandingPage from './pages/Landing';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from "./pages/Landing";
 
 function App() {
   return (
     <>
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <Routes>
-          <Route path='/'  Component={LandingPage} />
+          <Route path="/" Component={LandingPage} />
         </Routes>
-      </BrowserRouter> */}
-      <LandingPage />
+      </BrowserRouter>
     </>
   );
 }
