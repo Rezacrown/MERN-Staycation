@@ -5,6 +5,7 @@ import MostPicked from "@/components/MostPicked";
 // mock
 import landingMock from "@/mock/landingPage.json";
 import { LandingPageProps } from "@/dto/landing.dto";
+import Categories from "@/components/Categories";
 
 export default function LandingPage(props: LandingPageProps) {
   return (
@@ -12,6 +13,7 @@ export default function LandingPage(props: LandingPageProps) {
       <Header pathname="/" {...props} />
       <Hero data={landingMock.hero} />
       <MostPicked data={landingMock.mostPicked} />
+      <Categories data={landingMock.categories}/>
     </>
   );
 }

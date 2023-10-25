@@ -22,3 +22,18 @@ export interface MostPickedprops {
   price: string;
   unit: string;
 }
+
+export interface CategoriesProps {
+  _id: string;
+  name: string;
+  items: items[];
+}
+
+interface items {
+  _id: string;
+  name: string;
+  imageUrl: string | null;
+  country: string;
+  city: string;
+  isPopular: boolean;
+}
