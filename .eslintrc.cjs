@@ -19,5 +19,6 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off",
     // "eslint-disable no-undef": "off",
     "no-undef": "off",
+    "prefer-const": "off",
   },
 };

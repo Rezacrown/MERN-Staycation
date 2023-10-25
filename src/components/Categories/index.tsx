@@ -9,7 +9,7 @@ export default function Categories({ data }: CustomCategoriesProps) {
   return (
     <>
       {data.map((categories) => (
-        <div key={categories._id} className="container">
+        <div key={`categories-${Math.random()}`} className="container">
           <h4 className="mb-3 fw-medium">{categories.name}</h4>
           <div
             className="container-grid gap-3"
@@ -17,7 +17,7 @@ export default function Categories({ data }: CustomCategoriesProps) {
           >
             {categories.items.length > 0 ? (
               categories.items.map((item) => (
-                <div key={item._id} className="item column-3 row-1">
+                <div key={`items-${item._id}`} className="item column-3 row-1">
                   <div className="card">
                     {item.isPopular && (
                       <div className="tag">
