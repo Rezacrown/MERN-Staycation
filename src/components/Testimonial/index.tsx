@@ -7,7 +7,7 @@ import Button from "../Button";
 
 export default function Testimonial({ data }: { data: TestimonialProps }) {
   return (
-    <section className="container" style={{ height: "300px" }}>
+    <section className="container">
       <div className="row align-items-center">
         <div className="col-auto" style={{ marginRight: "70px" }}>
           <div className="testimonial-hero" style={{ margin: `30px 0 0 30px` }}>

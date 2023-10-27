@@ -217,5 +217,65 @@ section {
 .testimonial-hero img {
     width: 365px;
     height: 500px;
-    
+}
+
+footer {
+    padding-top: 50px;
+    border-top: 1px solid $gray-200;
+
+    .brand-tagline {
+        color: $gray-500;
+        font-family: Poppins;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+        margin-left: 12px;
+    }
+
+    .col-2,
+    .col-3 {
+        h6 {
+            text-align: start;
+        }
+        .list-group-item {
+            padding: 0.3125rem 0;
+            border: none;
+            text-align: start;
+
+            .btn {
+                color: $gray-500;
+                font-weight: 300;
+                text-align: start;
+                padding: 0;
+            }
+            & .btn:hover {
+                color: $gray-800;
+            }
+            span {
+                font-weight: 300;
+                display: block;
+                text-align: start;
+                padding: 0;
+                color: $gray-500;
+            }
+        }
+    }
+
+    .copyright {
+        // margin: 50px auto;
+        // padding: 35px 0;
+        // color: $gray-500;
+        // font-weight: 300;
+        // text-align: center;
+
+        margin: 60px 0 50px 16px;
+        color: #b0b0b0;
+        text-align: center;
+        font-family: Poppins;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+    }
 }

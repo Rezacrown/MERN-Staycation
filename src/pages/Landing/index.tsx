@@ -7,6 +7,7 @@ import Testimonial from "@/components/Testimonial";
 // mock
 import landingMock from "@/mock/landingPage.json";
 import { LandingPageProps } from "@/dto/landing.dto";
+import Footer from "@/components/Footer";
 
 export default function LandingPage(props: LandingPageProps) {
   return (
@@ -16,6 +17,7 @@ export default function LandingPage(props: LandingPageProps) {
       <MostPicked data={landingMock.mostPicked} />
       <Categories data={landingMock.categories} />
       <Testimonial data={landingMock.testimonial} />
+      <Footer />
     </>
   );
 }
