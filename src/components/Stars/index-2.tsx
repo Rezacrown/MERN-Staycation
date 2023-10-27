@@ -32,6 +32,8 @@ export default function Stars({
       ></div>
     );
   }
+
+  
   if (decimals > 0 && value <= 5)
     star.push(
       <div

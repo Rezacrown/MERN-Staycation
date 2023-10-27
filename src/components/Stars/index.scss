@@ -6,16 +6,17 @@
 //     min-width: 200px;
 //     display: inline-flex;
 //     .star {
-//         // position: absolute;
+//         position: absolute;
 //         display: inline-flex;
-//         mask: url(../../assets/icons/ic_star.svg) no-repeat center left;
+//         // mask: url(../../assets/icons/ic_star.svg) no-repeat center left;
 
 //         &:not(.placeholder) {
-//             background-color: $yellow;
-//             z-index: 2;
+//             // background-color: $yellow;
+//             z-index: 3;
 //         }
 //         &.placeholder {
-//             background-color: $gray-200;
+//             // background-color: $gray-200;
+//             // background-color: $gray-700;
 //             z-index: 1;
 //         }
 //     }
@@ -28,29 +29,17 @@
     .star {
         position: absolute;
         display: inline-flex;
-        background-color: transparent;
-        mask: url(../../assets/icons/ic_star.svg) no-repeat center left;
+        // background-color: transparent;
+        // mask: url(../../assets/icons/ic_star.svg) no-repeat center left;
         &:not(.placeholder) {
             z-index: 2;
             // background-color: $yellow;
+            color: $yellow;
         }
         &.placeholder {
             z-index: 1;
             // background-color: $gray-200;
+            // color: $gray-200;
         }
     }
 }
-
-// .star {
-//         position: absolute;
-//         display: inline-flex;
-//         mask: url(../../assets/icons/ic_star.svg) no-repeat center left;
-//         &:not(.placeholder) {
-//             color: $yellow;
-//             z-index: 2;
-//         }
-//         &.placeholder {
-//             color: $gray-200;
-//             z-index: 1;
-//         }
-//     }
