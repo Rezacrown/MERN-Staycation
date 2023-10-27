@@ -50,7 +50,7 @@ const Rating: React.FC<RatingProps> = ({
   }
 
   // Menambahkan bintang parsial (berwarna kuning)
-  if (decimalPart > 0 && rating <= 5) {
+  if (decimalPart > 0 && rating <= maxRating) {
     const percentage = decimalPart * 1000; // dibuat seribu karena ada masalah, contoh rating 3.5 tidak akan menjadi 3 setengah karena masalah persentase
     const clipId = `clip-${Math.random().toString(36).substr(2, 5)}`;
 
@@ -81,7 +81,7 @@ const Rating: React.FC<RatingProps> = ({
 
   // make placeholder stars (silver stars)
   const starPlaceholder = [];
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < maxRating; i++) {
     starPlaceholder.push(
       <svg
         key={i}
