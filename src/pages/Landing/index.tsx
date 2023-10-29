@@ -9,7 +9,7 @@ import landingMock from "@/mock/landingPage.json";
 import { LandingPageProps } from "@/dto/landing.dto";
 import Footer from "@/components/Footer";
 
-export default function LandingPage(props: LandingPageProps) {
+export default function LandingPage({ props }: { props?: LandingPageProps }) {
   return (
     <>
       <Header pathname="/" {...props} />

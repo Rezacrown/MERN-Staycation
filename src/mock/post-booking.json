@@ -3,6 +3,7 @@
   "price": "240",
   "bookingDateStart": "new Date()",
   "bookingDateEnd": "new Date()",
+  
   "firstName": "Angga",
   "lastName": "Risky",
   "emailAddress": "angga@buildwithangga.com",
