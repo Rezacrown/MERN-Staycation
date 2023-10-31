@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InputNumber from "../InputNumber";
+import InputDate from "../InputDate";
 
 export interface PayloadStateFormDetail {
   name: string;
@@ -10,17 +11,21 @@ export interface PayloadStateFormDetail {
 }
 
 export default function FormDetail() {
-  // const [payload, setPayload] = useState<PayloadStateFormDetail>({
-  //   name: "",
-  //   price: props.price,
-  //   duration: 1,
-  //   bookingDateStart: new Date(),
-  //   bookingDateEnd: new Date(),
-  // });
-
+  // state
   const [numberData, setNumberData] = useState(1);
+  const [dateData, setDateData] = useState({
+    bookingDateStart: new Date(),
+    bookingDateEnd: new Date(),
+  });
 
-  useEffect(() => {}, []);
+
+
+  // for Input Date
+  let valDate = {
+    startDate: new Date(),
+    endDate: new Date(),
+    key: "selection",
+  };
 
   return (
     <div>
@@ -33,6 +38,11 @@ export default function FormDetail() {
         placeholder="select Duration"
         handleChangeValue={setNumberData}
         className="w-25"
+      />
+      <InputDate
+        placeholder="Pick Date"
+        value={valDate}
+        setPayload={setDateData}
       />
     </div>
   );
