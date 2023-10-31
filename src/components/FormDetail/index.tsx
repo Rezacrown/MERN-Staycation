@@ -18,26 +18,22 @@ export default function FormDetail() {
   //   bookingDateEnd: new Date(),
   // });
 
-  const [number, setNumber] = useState(1)
-  
+  const [numberData, setNumberData] = useState(1);
 
-  useEffect(() => {
-    
-  }, [])
+  useEffect(() => {}, []);
 
   return (
     <div>
       <InputNumber
-        value={number}
-        max={5}
+        value={numberData}
+        max={3}
         min={1}
-        name="input"
         prefix=""
-        suffix=" night"
+        suffix={` Night`}
         placeholder="select Duration"
-        handleChangeValue={setNumber}
+        handleChangeValue={setNumberData}
+        className="w-25"
       />
-      {/* <Inputdate name="" placeholder="select" value={''} /> */}
     </div>
   );
 }

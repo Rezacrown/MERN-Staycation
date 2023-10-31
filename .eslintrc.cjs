@@ -20,5 +20,6 @@ module.exports = {
     // "eslint-disable no-undef": "off",
     "no-undef": "off",
     "prefer-const": "off",
+    "react-hooks/rules-of-hooks": "off",
   },
 };

@@ -2,20 +2,17 @@ import { useState } from "react";
 import "./index.scss";
 
 interface InputDateProps {
-  name: string;
   value: number;
   min: number;
   max: number;
   placeholder: string;
   prefix?: string;
   suffix?: string;
+  className?: string;
   handleChangeValue: (e?: any) => void;
 }
 
-
-
 export default function InputNumber({
-  name,
   value,
   prefix,
   suffix,
@@ -23,6 +20,7 @@ export default function InputNumber({
   max = 1,
   placeholder,
   handleChangeValue,
+  className,
 }: InputDateProps): JSX.Element {
   const [displayInput, setDisplayInput] = useState(
     `${prefix}${value}${suffix}`
@@ -39,7 +37,7 @@ export default function InputNumber({
 
     if (isNumeric && Number(valuePure) <= max && Number(valuePure) >= min) {
       setDisplayInput(
-        `${prefix}${valuePure}${suffix}`
+        `${prefix}${valuePure}${suffix}${Number(valuePure) > 1 ? "s" : ""}`
       );
       handleChangeValue(Number(valuePure));
     }
@@ -51,7 +49,6 @@ export default function InputNumber({
       changeDisplayInput({
         target: {
           value: value + 1,
-          name: name,
         },
       });
     }
@@ -61,40 +58,42 @@ export default function InputNumber({
       changeDisplayInput({
         target: {
           value: value - 1,
-          name: name,
         },
       });
     }
   };
 
   return (
-    <div className="d-flex justify-content-end mx-5 mt-3">
-      <div
-        className="btn btn-danger"
-        style={{ width: 40, height: 40 }}
-        onClick={() => handleMinus(value)}
-      >
-        -
-      </div>
-      {/*  */}
 
-      <input
-        type="text"
-        placeholder={placeholder}
-        pattern="[0-9]*"
-        min={min}
-        max={max}
-        value={displayInput}
-        className="form-control"
-      />
+    <div className={["input-number mb-3", className].join(" ")}>
+      <div className="input-group">
+        <div className="input-group-prepend">
+          <span
+            className="input-group-text minus"
+            onClick={() => handleMinus(value)}
+          >
+            -
+          </span>
+        </div>
 
-      {/*  */}
-      <div
-        className="btn btn-success text-center"
-        style={{ width: 40, height: 40 }}
-        onClick={() => handlePlus(value)}
-      >
-        +
+        <input
+          type="text"
+          placeholder={placeholder}
+          pattern="[0-9]*"
+          min={min}
+          max={max}
+          value={String(displayInput)}
+          className="form-control"
+        />
+
+        <div className="input-group-append">
+          <span
+            className="input-group-text plus"
+            onClick={() => handlePlus(value)}
+          >
+            +
+          </span>
+        </div>
       </div>
     </div>
   );
