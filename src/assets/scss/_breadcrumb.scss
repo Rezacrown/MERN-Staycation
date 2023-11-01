@@ -17,24 +17,38 @@
   margin-bottom: var(--#{$prefix}breadcrumb-margin-bottom);
   @include font-size(var(--#{$prefix}breadcrumb-font-size));
   list-style: none;
-  background-color: var(--#{$prefix}breadcrumb-bg);
+  // background-color: var(--#{$prefix}breadcrumb-bg);
   @include border-radius(var(--#{$prefix}breadcrumb-border-radius));
 }
 
 .breadcrumb-item {
+  // custom
+  a {
+    color: $gray-400;
+  }
+
   // The separator between breadcrumbs (by default, a forward-slash: "/")
   + .breadcrumb-item {
-    padding-left: var(--#{$prefix}breadcrumb-item-padding-x);
+    // padding-left: var(--#{$prefix}breadcrumb-item-padding-x);
+    padding-left: 1.5rem;
+    text-decoration: none;
 
     &::before {
       float: left; // Suppress inline spacings and underlining of the separator
-      padding-right: var(--#{$prefix}breadcrumb-item-padding-x);
-      color: var(--#{$prefix}breadcrumb-divider-color);
-      content: var(--#{$prefix}breadcrumb-divider, escape-svg($breadcrumb-divider)) #{"/* rtl:"} var(--#{$prefix}breadcrumb-divider, escape-svg($breadcrumb-divider-flipped)) #{"*/"};
+      // padding-right: var(--#{$prefix}breadcrumb-item-padding-x);
+      padding-right: 1.5rem;
+      // color: var(--#{$prefix}breadcrumb-divider-color);
+      color: $gray-400;
+      content: var(--#{$prefix}breadcrumb-divider, escape-svg($breadcrumb-divider)) #{"/* rtl:"} var(
+          --#{$prefix}breadcrumb-divider,
+          escape-svg($breadcrumb-divider-flipped)
+        ) #{"*/"};
     }
   }
 
   &.active {
-    color: var(--#{$prefix}breadcrumb-item-active-color);
+    // color: var(--#{$prefix}breadcrumb-item-active-color);
+    // color: $gray-900;
+    color: #152c5b;
   }
 }

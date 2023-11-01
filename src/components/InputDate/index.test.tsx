@@ -1,13 +1,12 @@
 import "@testing-library/jest-dom";
 import { expect } from "vitest";
 import { render, fireEvent } from "@testing-library/react";
-import InputNumber from "./index";
 import { useState } from "react";
 import InputDate from "./index";
 
 // definie test component for reusable test
 export function TestInput() {
-  const [dateData, setDateData] = useState({
+  const [, setDateData] = useState({
     bookingDateStart: new Date(),
     bookingDateEnd: new Date(),
   });
@@ -23,7 +22,6 @@ export function TestInput() {
       placeholder="Pick Date"
       value={valDate}
       setPayload={setDateData}
-      
     />
   );
 }
@@ -37,7 +35,6 @@ const setup = () => {
   return { container, wrapper, input };
 };
 
-
 test("Should have wrapper with className .form-control", () => {
   const { wrapper } = setup();
 
@@ -50,15 +47,14 @@ test("Should have tag <input> and has className .form-control", () => {
   expect(input).toBeInTheDocument();
 });
 
-
 test("Should show date picker when click input field", () => {
   const { container, input } = setup();
 
   //   screen.debug();
-  fireEvent.click(input!, { button: 1 });
+  fireEvent.click(input!);
+  // fireEvent.click(input!);
   const datePickerWrapper = container.querySelector(`.date-range-wrapper`);
   //   screen.debug();
 
   expect(datePickerWrapper).toBeInTheDocument();
 });
-
