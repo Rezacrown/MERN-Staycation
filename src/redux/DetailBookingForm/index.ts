@@ -1,3 +1,4 @@
+// import formatDate from "@/utils/formatDate";
 import { createSlice } from "@reduxjs/toolkit";
 import moment from "moment";
 
@@ -6,8 +7,8 @@ const slice = createSlice({
   initialState: {
     duration: 1,
     price: 0,
-    bookingDateStart: moment(new Date()).format("MMMM Do YYYY, h:mm:ss a"),
-    bookingDateEnd: moment(getTomorow()).format("MMMM Do YYYY, h:mm:ss a"),
+    bookingDateStart: moment(new Date()).format("DD MMMM YYYY, h:mm:ss a"),
+    bookingDateEnd: moment(getTomorow()).format("DD MMMM YYYY, h:mm:ss a"),
   },
   reducers: {
     handleChangeBooking: (
@@ -18,19 +19,20 @@ const slice = createSlice({
 
       state.price = price * Number(duration);
 
-      state.duration = duration;
+      // state.duration = duration;
       // state.duration = bookingDateEnd.getDate() - bookingDateStart.getDate() + 1; // +1 karena dihitung per night
+      state.duration =
+        moment(bookingDateEnd).date() - moment(bookingDateStart).date();
 
-      // console.log(bookingDateEnd.getDate());
-
-      // state.bookingDateStart = moment(bookingDateStart).format("MMM Do YYYY");
-      // state.bookingDateEnd = moment(bookingDateEnd).format("MMM Do YYYY");
-
+      console.log(bookingDateStart);
+      console.log(bookingDateEnd);
+      // state.bookingDateStart = formatDate(bookingDateStart);
+      // state.bookingDateEnd = formatDate(bookingDateEnd);
       (state.bookingDateStart = moment(bookingDateStart).format(
-        "MMMM Do YYYY, h:mm:ss a"
+        "DD MMMM YYYY, h:mm:ss a"
       )),
         (state.bookingDateEnd = moment(bookingDateEnd).format(
-          "MMMM Do YYYY, h:mm:ss a"
+          "DD MMMM YYYY, h:mm:ss a"
         ));
 
       return state;

@@ -46,23 +46,49 @@ export default function InputNumber({
       );
       // change global value duration and date match type button
 
-      dispatch(
-        handleChangeBooking({
-          ...BookingPayload,
-          duration: Number(valuePure),
-          bookingDateEnd: moment(
-            BookingPayload.bookingDateEnd.setDate(
-              BookingPayload.bookingDateEnd.getDate() + Number(valuePure)
-            )
-          ).toDate(),
-        })
+      // change value global
+      const dateEndString = Number(
+        BookingPayload.bookingDateEnd.toString().split(" ")[0]
       );
+
+      switch (type) {
+        case "plus":
+          dispatch(
+            handleChangeBooking({
+              ...BookingPayload,
+              duration: Number(valuePure),
+              bookingDateEnd: moment(
+                new Date().setDate(dateEndString + 1)
+              ).toDate(),
+            })
+          );
+          break;
+        case "minus":
+          dispatch(
+            handleChangeBooking({
+              ...BookingPayload,
+              duration: Number(valuePure),
+              bookingDateEnd: moment(
+                new Date().setDate(dateEndString - 1)
+              ).toDate(),
+            })
+          );
+      }
+
+      // dispatch(
+      //   handleChangeBooking({
+      //     ...BookingPayload,
+      //     duration: Number(valuePure),
+      //     // bookingDateEnd: new Date(BookingPayload.bookingDateEnd.getDate() + 1),
+      //   })
+      // );
     }
   };
 
   //
   const handlePlus = (value: number) => {
     if (value < max) {
+      // set display
       changeDisplayInput(value + 1, "plus");
     }
   };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DateRange, RangeFocus, RangeKeyDict } from "react-date-range";
 import formatDate from "@/utils/formatDate";
 
@@ -15,6 +15,7 @@ import {
   // FormBookingData,
   PayloadStateBookingFormDetail,
 } from "@/redux/DetailBookingForm";
+import moment from "moment";
 
 //
 export default function InputDate({
@@ -31,9 +32,23 @@ InputDateProps) {
 
   // state
   const [isShow, setIsShow] = useState(false);
-  const [displayDate, setDisplayDate] = useState("");
+  const [displayDate, setDisplayDate] = useState(
+    `${
+      BookingPayload.bookingDateStart
+        ? formatDate(moment(new Date().setDate(new Date().getDate())).toDate())
+        : ""
+    }${
+      BookingPayload.bookingDateEnd
+        ? " - " +
+          formatDate(
+            moment(new Date().setDate(new Date().getDate() + 1)).toDate()
+          )
+        : ""
+    }` ?? ""
+  );
 
   const datePickerChange = (value: RangeKeyDict) => {
+    // set value of global state
     dispatch(
       handleChangeBooking({
         ...BookingPayload,
@@ -61,6 +76,20 @@ InputDateProps) {
   const check = (focus: RangeFocus) => {
     focus.indexOf(1) < 0 && setIsShow(false);
   };
+
+  useEffect(() => {
+    setDisplayDate(
+      `${
+        BookingPayload.bookingDateStart
+          ? formatDate(BookingPayload.bookingDateStart)
+          : ""
+      }${
+        BookingPayload.bookingDateEnd
+          ? " - " + formatDate(BookingPayload.bookingDateEnd)
+          : ""
+      }`
+    );
+  }, [BookingPayload.bookingDateStart, BookingPayload.bookingDateEnd]);
 
   return (
     <div ref={null} className={["input-date mb-3", className].join(" ")}>

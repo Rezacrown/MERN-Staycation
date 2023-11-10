@@ -1,5 +1,7 @@
 export default (date: Date) => {
-  const d = new Date(date);
+  let d: Date = new Date(date);
+
+  // const d = new Date(date);
   const dtf = new Intl.DateTimeFormat("en", {
     year: "numeric",
     month: "short",
