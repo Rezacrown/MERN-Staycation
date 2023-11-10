@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { DateRange, RangeFocus } from "react-date-range";
+import { DateRange, RangeFocus, RangeKeyDict } from "react-date-range";
 import formatDate from "@/utils/formatDate";
-
 
 // style
 import "./index.scss";
@@ -9,35 +8,43 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import IconCalendar from "../../assets/icons/ic_calendar.svg";
 
-// interface
-interface InputDateProps {
-  value: {
-    startDate: Date;
-    endDate: Date;
-    key: string;
-  };
-  placeholder: string;
-  className?: string;
-  setPayload: (e: { bookingDateStart: Date; bookingDateEnd: Date }) => void;
-}
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import {
+  handleChangeBooking,
+  // FormBookingData,
+  PayloadStateBookingFormDetail,
+} from "@/redux/DetailBookingForm";
 
+//
 export default function InputDate({
-  className,
   //   name,
+  className,
   placeholder,
   value,
-  setPayload,
-}: InputDateProps) {
+}: // setPayload,
+InputDateProps) {
+  const dispatch = useDispatch();
+  const BookingPayload = useSelector(
+    (state: any) => state.BookingForm
+  ) as PayloadStateBookingFormDetail;
+
   // state
   const [isShow, setIsShow] = useState(false);
   const [displayDate, setDisplayDate] = useState("");
 
-  const datePickerChange = (value: any) => {
-    //   set data for payload
-    setPayload({
-      bookingDateStart: value.selection.startDate,
-      bookingDateEnd: value.selection.endDate,
-    });
+  const datePickerChange = (value: RangeKeyDict) => {
+    dispatch(
+      handleChangeBooking({
+        ...BookingPayload,
+        bookingDateStart: value.selection.startDate!,
+        bookingDateEnd: value.selection.endDate!,
+        duration:
+          value.selection.endDate!.getDate()! -
+          value.selection.startDate!.getDate() +
+          1,
+      })
+    );
 
     //   set display date with date formated
     setDisplayDate(
@@ -80,7 +87,7 @@ export default function InputDate({
           <div className="date-range-wrapper">
             <DateRange
               editableDateInputs={true}
-              onChange={datePickerChange}
+              onChange={(e: RangeKeyDict) => datePickerChange(e)}
               moveRangeOnFirstSelection={false}
               onRangeFocusChange={check}
               ranges={[value]}
@@ -90,4 +97,17 @@ export default function InputDate({
       </div>
     </div>
   );
+}
+
+// interface
+interface InputDateProps {
+  value: {
+    startDate: Date;
+    endDate: Date;
+    key: string;
+  };
+  placeholder: string;
+  className?: string;
+  // setPayload: (e: { bookingDateStart: Date; bookingDateEnd: Date }) => void;
+  // setPayload: (e?: PayloadStateBookingFormDetail) => void;
 }

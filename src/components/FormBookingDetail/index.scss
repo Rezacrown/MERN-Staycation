@@ -1,0 +1,40 @@
+@import "../../assets/scss/colorVariable";
+
+.booking-form {
+    border: 1px solid #e5e5e5;
+    padding: 38px 80px;
+
+    .title-booking {
+        font-family: "Poppins";
+        h5 {
+            color: #152c5b;
+            font-weight: bold;
+        }
+        h2 {
+            color: #b0b0b0;
+            font-weight: 300;
+            line-height: 54px;
+            font-size: 38px;
+            letter-spacing: 2px;
+
+            & span {
+                font-weight: bold;
+                color: #1abc9c;
+            }
+        }
+    }
+
+    .total-booking {
+        p {
+            color: $gray-600;
+            font-family: "Poppins";
+            font-weight: 300;
+
+            & span {
+                color: #152c5b;
+                font-style: normal;
+                font-weight: bold;
+            }
+        }
+    }
+}
