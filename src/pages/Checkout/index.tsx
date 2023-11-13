@@ -5,7 +5,7 @@ export default function CheckoutPage() {
   return (
     <div>
       <Brandicon isCenter />
-      <Stepper step={[1, 2, 3, 4]} currentStep={2} successStep={[1]} />
+      <Stepper step={[1, 2, 3]} currentStep={2} successStep={[1]} />
     </div>
   );
 }
