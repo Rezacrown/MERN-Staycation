@@ -5,6 +5,7 @@ import "./assets/scss/style.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/Landing";
 import DetailPage from "./pages/Detail";
+import CheckoutPage from "./pages/Checkout";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" Component={LandingPage} />
           <Route path="/properties/:id" Component={DetailPage} />
+          <Route path="/checkout" Component={CheckoutPage} />
         </Routes>
       </BrowserRouter>
     </>

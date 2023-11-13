@@ -24,8 +24,8 @@ const slice = createSlice({
       state.duration =
         moment(bookingDateEnd).date() - moment(bookingDateStart).date();
 
-      console.log(bookingDateStart);
-      console.log(bookingDateEnd);
+      // console.log(bookingDateStart);
+      // console.log(bookingDateEnd);
       // state.bookingDateStart = formatDate(bookingDateStart);
       // state.bookingDateEnd = formatDate(bookingDateEnd);
       (state.bookingDateStart = moment(bookingDateStart).format(

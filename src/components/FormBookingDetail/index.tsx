@@ -8,19 +8,37 @@ import "./index.scss";
 // redux
 import {
   handleChangeBooking,
-  // PayloadStateBookingFormDetail as PayloadForm,
+  PayloadStateBookingFormDetail as PayloadForm,
 } from "@/redux/DetailBookingForm";
-// import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-export default function FormDetail({ price }: { price: number }) {
-  // const dispatch = useDispatch();
-  // const payload = useSelector((state: any) => state.BookingForm as PayloadForm);
+export default function FormDetail({
+  price,
+  unit,
+}: {
+  price: number;
+  unit: string;
+}) {
+  const BookingForm = useSelector(
+    (state: any) => state.BookingForm as PayloadForm
+  );
 
-  // for default values keys Input Date
+  // for default values keys components InputDate
   const valDate = {
     startDate: new Date(),
     endDate: new Date(),
     key: "selection",
+  };
+
+  const handleSubmit = async () => {
+    const payload = {
+      duration: BookingForm.duration,
+      price: price * BookingForm.duration,
+      bookingDateStart: BookingForm.bookingDateStart,
+      bookingDateEnd: BookingForm.bookingDateEnd,
+    };
+
+    console.log({ payload });
   };
 
   return (
@@ -62,11 +80,14 @@ export default function FormDetail({ price }: { price: number }) {
       {/* total payment */}
       <div className="total-booking">
         <p>
-          You will pay <span>$ {price}</span> USD per <span>2 nights</span>
+          You will pay <span>$ {price * BookingForm.duration}</span> USD per{" "}
+          <span>
+            {BookingForm.duration} {unit}
+          </span>
         </p>
       </div>
       <Button
-        // handleClick={handleSetData}
+        handleClick={handleSubmit}
         isPrimary
         isBlock
         hasShandow

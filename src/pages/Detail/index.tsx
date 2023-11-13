@@ -48,6 +48,7 @@ export default function DetailPage() {
             <Fade direction="down" triggerOnce>
               <FormBookingDetail
                 price={Number(DetailMock.price)}
+                unit={DetailMock.unit}
                 // itemDetails={page[match.params.id]}
                 // startBooking={this.props.checkoutBooking}
               />
@@ -56,6 +57,7 @@ export default function DetailPage() {
         </div>
       </section>
       <Activities data={DetailMock.activities} />
+      {/* <Categories data={DetailMock.categories} /> */}
       {/* <Categories data={DetailMock.categories} /> */}
       <Testimonial data={DetailMock.testimonial} />
       <Footer />
