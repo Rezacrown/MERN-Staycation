@@ -5,15 +5,15 @@
   "imageUrls": [
     {
       "_id": "asd1293uasdads1",
-      "url": "/images/img-featured-1.jpg"
+      "url": "/image/featured-img-detail-1.jpg"
     },
     {
       "_id": "asd1293uasdads1",
-      "url": "/images/img-featured-2.jpg"
+      "url": "/image/featured-img-detail-2.jpg"
     },
     {
       "_id": "asd1293uasdads1",
-      "url": "/images/img-featured-3.jpg"
+      "url": "/image/featured-img-detail-3.jpg"
     }
   ],
   "country": "Indonesia",
@@ -30,49 +30,49 @@
       "_id": "asd1293uasdads1",
       "qty": "3",
       "name": "bedroom",
-      "imageUrl": "/images/icon-bedroom.svg"
+      "imageUrl": "/image/icons/ic_bedroom.svg"
     },
     {
       "_id": "asd1293uasdads1",
       "qty": "1",
       "name": "living room",
-      "imageUrl": "/images/icon-livingroom.svg"
+      "imageUrl": "/image/icons/ic_livingroom.svg"
     },
     {
       "_id": "asd1293uasdads1",
       "qty": "2",
       "name": "bath room",
-      "imageUrl": "/images/icon-bathroom.svg"
+      "imageUrl": "/image/icons/ic_bathroom.svg"
     },
     {
       "_id": "asd1293uasdads1",
       "qty": "1",
       "name": "dining room",
-      "imageUrl": "/images/icon-diningroom.svg"
+      "imageUrl": "/image/icons/ic_diningroom.svg"
     },
     {
       "_id": "asd1293uasdads1",
       "qty": "10",
       "name": "mbps",
-      "imageUrl": "/images/icon-wifi.svg"
+      "imageUrl": "/image/icons/ic_wifi.svg"
     },
     {
       "_id": "asd1293uasdads1",
       "qty": "2",
       "name": "units ready",
-      "imageUrl": "/images/icon-airconditioner.svg"
+      "imageUrl": "/image/icons/ic_ac.svg"
     },
     {
       "_id": "asd1293uasdads1",
       "qty": "2",
       "name": "refrigerator",
-      "imageUrl": "/images/icon-refrigerator.svg"
+      "imageUrl": "/image/icons/ic_kulkas.svg"
     },
     {
       "_id": "asd1293uasdads1",
       "qty": "1",
       "name": "television",
-      "imageUrl": "/images/icon-tv.svg"
+      "imageUrl": "/image/icons/ic_tv.svg"
     }
   ],
   "activities": [
@@ -80,25 +80,25 @@
       "_id": "asd1293uasdads1",
       "name": "Kebun Park",
       "type": "Nature",
-      "imageUrl": "/images/categoryItem1.png"
+      "imageUrl": "/image/img-activities-1.jpg"
     },
     {
       "_id": "asd1293uasdads1",
       "name": "Water land",
       "type": "Pool",
-      "imageUrl": "/images/categoryItem2.png"
+      "imageUrl": "/image/img-activities-2.jpg"
     },
     {
       "_id": "asd1293uasdads1",
       "name": "Kebun Park",
       "type": "Nature",
-      "imageUrl": "/images/categoryItem3.png"
+      "imageUrl": "/image/img-activities-3.jpg"
     },
     {
       "_id": "asd1293uasdads1",
       "name": "Water land",
       "type": "Pool",
-      "imageUrl": "/images/categoryItem4.png"
+      "imageUrl": "/image/img-activities-1.jpg"
     }
   ],
   "categories": [
@@ -143,7 +143,7 @@
   ],
   "testimonial": {
     "_id": "asd1293uasdads1",
-    "imageUrl": "/images/testimonial-detailspage.jpg",
+    "imageUrl": "/image/img-testimonial-detail.jpg",
     "name": "Happy Family",
     "rate": 4.25,
     "content": "What a great trip with my family and I should try again and again next time soon...",
