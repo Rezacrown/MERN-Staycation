@@ -1,16 +1,21 @@
 @import "../../assets/scss/colorVariable";
 
 .text-input {
-    & label {
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: start;
+
+    label {
         display: block;
         color: #152c5b;
-        // font-size: 16px;
-        // font-family: "Poppins";
-        // font-weight: 400;
+        font-size: 16px;
+        font-family: "Poppins";
+        font-weight: 400;
     }
 
     & input {
-        background-color: #f5f6f8;
+        margin-top: 8px;
+        background-color: $gray-200;
         border-radius: 4px;
         border-style: none;
         padding: 5px 22px;
@@ -18,5 +23,14 @@
         font-family: "Poppins";
         font-size: 16px;
         font-weight: 400;
+
+        width: 320px;
+        height: 45px;
+    }
+
+    & input::-webkit-inner-spin-button,
+    input::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
     }
 }

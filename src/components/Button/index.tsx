@@ -5,6 +5,7 @@ interface ButtonProps {
   children: ReactNode;
   type?: "button" | "link";
   className?: string;
+  style?: object;
   handleClick?: (e: any) => void;
   isPrimary?: boolean;
   isDisabled?: boolean;
@@ -31,6 +32,7 @@ export default function Button({
   isSmall,
   isPrimary,
   hasShandow,
+  style,
 }: ButtonProps) {
   // set classname
   const classname = [className, "btn"];
@@ -49,6 +51,7 @@ export default function Button({
         className={classname.join(" ")}
         target={target === "_blank" ? "_blank" : undefined}
         onClick={handleClick}
+        style={style ? style : {}}
       >
         {isLoading ? "...loading" : children}
       </Link>
@@ -61,6 +64,7 @@ export default function Button({
       className={classname.join(" ")}
       disabled={isDisabled}
       onClick={handleClick}
+      style={style ? style : {}}
     >
       {isLoading ? "...Loading" : children}
     </button>

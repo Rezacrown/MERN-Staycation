@@ -4,26 +4,32 @@ export default function TextInput({
   haveLabel = true,
   label,
   type = "text",
+  pattern,
   placeholder,
   value,
   readyOnly,
   InputClassName,
   LabelClassName,
+  containerClassName,
 }: TextInputProps) {
   return (
-    <div className="text-input">
-      {haveLabel && (
-        <label className={["text-primary", LabelClassName].join(" ")}>
-          {label}
-        </label>
-      )}
-      <input
-        className={["", InputClassName].join(" ")}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        readOnly={readyOnly}
-      />
+    <div className={["text-input", containerClassName].join(" ")}>
+      <div>
+        {haveLabel && (
+          <label className={["", LabelClassName].join(" ")}>{label}</label>
+        )}
+      </div>
+      <div>
+        <input
+          className={["", InputClassName].join(" ")}
+          // style={type === "number" ? {  } : {}}
+          type={type}
+          pattern={pattern && pattern}
+          placeholder={placeholder}
+          value={value}
+          readOnly={readyOnly}
+        />
+      </div>
     </div>
   );
 }
@@ -31,10 +37,12 @@ export default function TextInput({
 interface TextInputProps {
   haveLabel?: boolean;
   label?: string;
-  type?: "text" | "number" | "email";
+  type?: "text" | "number" | "email" | "tel";
+  pattern?: string;
   placeholder?: string;
   value?: string | number;
   readyOnly?: boolean;
   InputClassName?: string;
   LabelClassName?: string;
+  containerClassName?: string;
 }
