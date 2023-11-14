@@ -3,8 +3,17 @@ import Stepper from "@/components/Stepper";
 import Title_checkout from "./title";
 import Form_BookingInformation from "./form-bookingInformation";
 import Button from "@/components/Button";
+import { useState } from "react";
 
 export default function CheckoutPage() {
+  const FormState = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+  });
+  // const [isShow, setIsShow] = useState(false);
+
   return (
     <div>
       <Brandicon isCenter />
@@ -64,13 +73,22 @@ export default function CheckoutPage() {
           </div>
           {/*  */}
           <div className="col-4">
-            <Form_BookingInformation />
+            <Form_BookingInformation FormState={FormState} />
           </div>
         </div>
       </div>
       {/* button section */}
       <div className="mt-5 text-center mb-5" style={{ marginLeft: 60 }}>
-        <div>
+        <div
+          className={
+            FormState[0].firstName.length >= 3 &&
+            FormState[0].lastName.length >= 3 &&
+            FormState[0].email.length &&
+            FormState[0].phone.length
+              ? ""
+              : "d-none"
+          }
+        >
           <Button isPrimary isBlock style={{ width: "260px", height: "40px" }}>
             Continue To Book
           </Button>

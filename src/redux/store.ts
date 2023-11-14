@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 
 //
 import { FormBookingData } from "./DetailBookingForm";
+import { CheckoutForm } from "./CheckoutForm";
 
 export const store = configureStore({
   reducer: {
     BookingForm: FormBookingData,
+    CheckoutForm: CheckoutForm,
   },
   devTools: true,
 });

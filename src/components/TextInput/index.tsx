@@ -1,3 +1,4 @@
+import React from "react";
 import "./index.scss";
 
 export default function TextInput({
@@ -11,6 +12,8 @@ export default function TextInput({
   InputClassName,
   LabelClassName,
   containerClassName,
+  required,
+  handleChange,
 }: TextInputProps) {
   return (
     <div className={["text-input", containerClassName].join(" ")}>
@@ -24,6 +27,8 @@ export default function TextInput({
           className={["", InputClassName].join(" ")}
           // style={type === "number" ? {  } : {}}
           type={type}
+          onChange={handleChange}
+          required={required}
           pattern={pattern && pattern}
           placeholder={placeholder}
           value={value}
@@ -45,4 +50,6 @@ interface TextInputProps {
   InputClassName?: string;
   LabelClassName?: string;
   containerClassName?: string;
+  required?: boolean;
+  handleChange?: (e: React.FormEvent<HTMLInputElement>) => void;
 }
