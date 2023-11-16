@@ -3,7 +3,7 @@ import InputNumber from "../InputNumber";
 import InputDate from "../InputDate";
 import Button from "../Button";
 import "./index.scss";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // redux
 import {
@@ -19,6 +19,8 @@ export default function FormDetail({
   price: number;
   unit: string;
 }) {
+  const navigate = useNavigate();
+
   const BookingForm = useSelector(
     (state: any) => state.BookingForm as PayloadForm
   );
@@ -38,7 +40,10 @@ export default function FormDetail({
       bookingDateEnd: BookingForm.bookingDateEnd,
     };
 
-    console.log({ payload });
+    // set data for next step
+    localStorage.setItem("properties-book", JSON.stringify(payload));
+
+    navigate({ pathname: "/checkout" });
   };
 
   return (

@@ -42,7 +42,7 @@ export default function TextInput({
 interface TextInputProps {
   haveLabel?: boolean;
   label?: string;
-  type?: "text" | "number" | "email" | "tel";
+  type?: "text" | "number" | "email" | "tel" | "file";
   pattern?: string;
   placeholder?: string;
   value?: string | number;

@@ -1,63 +1,93 @@
 import Brandicon from "@/components/BrandIcon";
 import Stepper from "@/components/Stepper";
 import Title_checkout from "./title";
+
 import Form_BookingInformation from "./form-bookingInformation";
+import Form_BookingPayment from "./form-bookingPayment";
+import Properties_Information from "./properties-information";
+import Payment_Information from "./payment-information";
+
 import Button from "@/components/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { useSelector, useDispatch } from "react-redux";
+import {
+  handleStepOne,
+  CheckoutFormData,
+  handleStepTwo,
+} from "@/redux/CheckoutForm";
+("../../redux/CheckoutForm/index");
 
 export default function CheckoutPage() {
+  const navigate = useNavigate();
   const FormState = useState({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
+    accountHolder: "",
+    bankFrom: "",
+    proofPayment: "",
   });
-  // const [isShow, setIsShow] = useState(false);
+
+  const dispatch = useDispatch();
+  const dataCheckout = useSelector(
+    (state: any) => state.CheckoutForm as CheckoutFormData
+  );
+
+  const handleSubmit = async () => {
+    switch (dataCheckout.currentStepCheckout) {
+      case 1:
+        dispatch(
+          handleStepOne({
+            ...dataCheckout,
+            firstName: FormState[0].firstName,
+            lastName: FormState[0].lastName,
+            email: FormState[0].email,
+            phone: Number(FormState[0].phone),
+          })
+        );
+        break;
+      case 2:
+        dispatch(
+          handleStepTwo({
+            ...dataCheckout,
+            bankFrom: String(FormState[0].bankFrom),
+            accountHolder: String(FormState[0].accountHolder),
+            proofPayment: String(FormState[0].proofPayment),
+          })
+        );
+    }
+  };
+
+  // check data from localstorage
+  useEffect(() => {
+    if (!localStorage.getItem("properties-book")) {
+      navigate({ pathname: "/" });
+    }
+  }, [navigate]);
 
   return (
     <div>
       <Brandicon isCenter />
-      <Stepper step={[1, 2]} successStep={2} currentStep={2} />
+      <Stepper
+        step={[1, 2]}
+        successStep={dataCheckout.succesStepCheckout}
+        currentStep={dataCheckout.currentStepCheckout}
+      />
       <Title_checkout type="booking" />
       {/* form & info detail section */}
       <div className="container mt-5">
         <div className="row justify-content-center">
-          {/*  */}
+          {/* side left book information */}
           <div className="col-4">
-            <div className="">
-              <img
-                src="/image/img-categories-1.jpg"
-                width={420}
-                height={270}
-                alt=""
-              />
-              <div className="mt-3 d-flex justify-content-between">
-                <div className="">
-                  <h4 style={{ fontSize: 20, color: "#152C5B" }}>Podo Wae</h4>
-                  <p
-                    style={{ color: "#B0B0B0", fontSize: "15px" }}
-                    className="fw-light"
-                  >
-                    Madiun, Indonesia
-                  </p>
-                </div>
-                <div className="">
-                  <h5 style={{ color: "#152C5B", fontSize: "16px" }}>
-                    $480 USD{" "}
-                    <span
-                      style={{
-                        color: "#B0B0B0",
-                        lineHeight: "170%",
-                        fontWeight: 300,
-                      }}
-                    >
-                      per
-                    </span>{" "}
-                    2 nights
-                  </h5>
-                </div>
-              </div>
-            </div>
+            {/* step 1 */}
+            {dataCheckout.currentStepCheckout == 1 && (
+              <Properties_Information />
+            )}
+            {/* step 2 */}
+            {dataCheckout.currentStepCheckout == 2 && <Payment_Information />}
           </div>
           {/*  */}
           <div className="col-1" style={{ marginLeft: "120px" }}>
@@ -71,14 +101,20 @@ export default function CheckoutPage() {
               <path d="M1 1V433" stroke="#E5E5E5" stroke-linecap="round" />
             </svg>
           </div>
-          {/*  */}
+          {/* side right | form input */}
           <div className="col-4">
-            <Form_BookingInformation FormState={FormState} />
+            {/* step 1 */}
+            {dataCheckout.currentStepCheckout === 1 && (
+              <Form_BookingInformation FormState={FormState} />
+            )}
+            {/* step 2 */}
+            {dataCheckout.currentStepCheckout === 2 && <Form_BookingPayment />}
           </div>
         </div>
       </div>
       {/* button section */}
       <div className="mt-5 text-center mb-5" style={{ marginLeft: 60 }}>
+        {/* continue btn */}
         <div
           className={
             FormState[0].firstName.length >= 3 &&
@@ -89,10 +125,16 @@ export default function CheckoutPage() {
               : "d-none"
           }
         >
-          <Button isPrimary isBlock style={{ width: "260px", height: "40px" }}>
+          <Button
+            isPrimary
+            isBlock
+            style={{ width: "260px", height: "40px" }}
+            handleClick={handleSubmit}
+          >
             Continue To Book
           </Button>
         </div>
+        {/* cancel btn */}
         <div>
           <Button
             className="text-secondary mt-2"
