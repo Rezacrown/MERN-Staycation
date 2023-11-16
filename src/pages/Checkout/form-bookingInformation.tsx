@@ -2,11 +2,10 @@ import TextInput from "@/components/TextInput";
 // import {useState} from 'react'
 
 export default function Form_BookingInformation({
-  FormState,
-}: {
-  FormState: [any, any];
-}) {
-  const [CheckoutInfo, setCheckoutInfo] = FormState;
+  CheckoutInfo,
+  setCheckoutInfo,
+}: Form_BookingInformationprops) {
+  // const [CheckoutInfo, setCheckoutInfo] = FormState;
 
   return (
     <div className="">
@@ -65,4 +64,25 @@ export default function Form_BookingInformation({
       />
     </div>
   );
+}
+
+interface Form_BookingInformationprops {
+  CheckoutInfo: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    accountHolder: string;
+    bankFrom: string;
+    proofPayment: any;
+  };
+  setCheckoutInfo: (e: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    accountHolder: string;
+    bankFrom: string;
+    proofPayment: any;
+  }) => void;
 }

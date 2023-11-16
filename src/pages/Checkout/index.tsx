@@ -17,6 +17,7 @@ import {
   CheckoutFormData,
   handleStepTwo,
 } from "@/redux/CheckoutForm";
+import SuccesscheckoutPage from "../Success/checkout";
 ("../../redux/CheckoutForm/index");
 
 export default function CheckoutPage() {
@@ -50,23 +51,53 @@ export default function CheckoutPage() {
         );
         break;
       case 2:
-        dispatch(
-          handleStepTwo({
-            ...dataCheckout,
-            bankFrom: String(FormState[0].bankFrom),
-            accountHolder: String(FormState[0].accountHolder),
-            proofPayment: String(FormState[0].proofPayment),
-          })
-        );
+        try {
+          dispatch(
+            handleStepTwo({
+              ...dataCheckout,
+              bankFrom: String(FormState[0].bankFrom),
+              accountHolder: String(FormState[0].accountHolder),
+              proofPayment: String(FormState[0].proofPayment),
+            })
+          );
+          // navigate("/checkout-success");
+        } catch (error) {
+          console.log(error);
+        }
     }
   };
 
   // check data from localstorage
   useEffect(() => {
     if (!localStorage.getItem("properties-book")) {
-      navigate({ pathname: "/" });
+      navigate("/");
     }
-  }, [navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // useEffect(() => {
+  //   const step: CheckoutFormData = localStorage.getItem("checkout-data-step")
+  //     ? JSON.parse(localStorage.getItem("checkout-data-step")!)
+  //     : {};
+
+  //   if (step.currentStepCheckout == 2) {
+  //     FormState[1]({
+  //       ...FormState[0],
+  //       firstName
+  //     });
+  //   }
+  // }, [dataCheckout, dispatch]);
+
+  if (
+    dataCheckout.currentStepCheckout > 99 ||
+    dataCheckout.succesStepCheckout > 2
+  ) {
+    return (
+      <>
+        <SuccesscheckoutPage />
+      </>
+    );
+  }
 
   return (
     <div>
@@ -105,35 +136,69 @@ export default function CheckoutPage() {
           <div className="col-4">
             {/* step 1 */}
             {dataCheckout.currentStepCheckout === 1 && (
-              <Form_BookingInformation FormState={FormState} />
+              <Form_BookingInformation
+                // FormState={FormState}
+                CheckoutInfo={FormState[0]}
+                setCheckoutInfo={FormState[1]}
+              />
             )}
             {/* step 2 */}
-            {dataCheckout.currentStepCheckout === 2 && <Form_BookingPayment />}
+            {dataCheckout.currentStepCheckout === 2 && (
+              <Form_BookingPayment
+                CheckoutInfo={FormState[0]}
+                setCheckoutInfo={FormState[1]}
+              />
+            )}
           </div>
         </div>
       </div>
       {/* button section */}
       <div className="mt-5 text-center mb-5" style={{ marginLeft: 60 }}>
         {/* continue btn */}
-        <div
-          className={
-            FormState[0].firstName.length >= 3 &&
-            FormState[0].lastName.length >= 3 &&
-            FormState[0].email.length &&
-            FormState[0].phone.length
-              ? ""
-              : "d-none"
-          }
-        >
-          <Button
-            isPrimary
-            isBlock
-            style={{ width: "260px", height: "40px" }}
-            handleClick={handleSubmit}
-          >
-            Continue To Book
-          </Button>
-        </div>
+        {dataCheckout.currentStepCheckout == 1 &&
+          dataCheckout.succesStepCheckout == 0 && (
+            <div
+              className={
+                FormState[0].firstName.length >= 3 &&
+                FormState[0].lastName.length >= 3 &&
+                FormState[0].email.length &&
+                FormState[0].phone.length
+                  ? ""
+                  : "d-none"
+              }
+            >
+              <Button
+                isPrimary
+                isBlock
+                style={{ width: "260px", height: "40px" }}
+                handleClick={handleSubmit}
+              >
+                Continue To Book
+              </Button>
+            </div>
+          )}
+        {dataCheckout.currentStepCheckout == 2 &&
+          dataCheckout.succesStepCheckout == 1 && (
+            <div
+              className={
+                FormState[0].proofPayment &&
+                FormState[0].bankFrom &&
+                FormState[0].accountHolder
+                  ? ""
+                  : "d-none"
+              }
+            >
+              <Button
+                isPrimary
+                isBlock
+                style={{ width: "260px", height: "40px" }}
+                handleClick={handleSubmit}
+              >
+                Continue To Book
+              </Button>
+            </div>
+          )}
+
         {/* cancel btn */}
         <div>
           <Button

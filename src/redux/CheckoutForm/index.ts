@@ -14,7 +14,7 @@ const slice = createSlice({
     // step 2
     accountHolder: "",
     bankFrom: "",
-    proofPayment: "",
+    proofPayment: "" as string | File,
 
     // from localstorage
     duration: "",
@@ -52,20 +52,26 @@ const slice = createSlice({
       state.currentStepCheckout = 2;
       state.succesStepCheckout = 1;
 
+      //
+      // firstName:
+      //       payload.firstName.length > 2 ? String(payload.firstName) : "",
+      //     lastName: payload.lastName.length > 2 ? String(payload.lastName) : "",
+      //     emailAddress: payload.email ? String(payload.email) : "",
+      //     phoneNumber:
+      //       String(payload.phone).length >= 9 &&
+      //       String(payload.phone).length <= 16
+      //         ? String(payload.phone)
+      //         : "",
+
       // set data from payload step 1
       localStorage.setItem(
         "checkout-data-step",
         JSON.stringify({
           ...state,
-          firstName:
-            payload.firstName.length > 2 ? String(payload.firstName) : "",
-          lastName: payload.lastName.length > 2 ? String(payload.lastName) : "",
-          emailAddress: payload.email ? String(payload.email) : "",
-          phoneNumber:
-            String(payload.phone).length >= 9 &&
-            String(payload.phone).length <= 16
-              ? String(payload.phone)
-              : "",
+          firstName: payload.firstName,
+          lastName: payload.lastName,
+          emailAddress: payload.email,
+          phoneNumber: String(payload.phone),
         })
       );
 
@@ -83,23 +89,25 @@ const slice = createSlice({
         : {};
 
       // check data localstorage is valid
-      if (
-        Object.keys(data).length < 4 ||
-        Object.values(data).length < 4 ||
-        Object.values(data).includes(null || "")
-      ) {
-        throw new Error("properties data not found");
-      }
+      // if (
+      //   Object.keys(data).length < 4 ||
+      //   Object.values(data).length < 4 ||
+      //   Object.values(data).includes(null || "")
+      // ) {
+      //   throw new Error("properties data not found");
+      // }
 
       // check previus step data
-      Object.values(data).forEach((val) => {
-        if (val == "") throw new Error("some data missing");
-      });
+      // Object.values(data).forEach((val) => {
+      //   if (val == "") throw new Error("some data missing");
+      // });
 
       // set state
       state.accountHolder = payload.accountHolder;
       state.bankFrom = payload.bankFrom;
       state.proofPayment = payload.proofPayment;
+
+      console.log({ proofPayment: payload.proofPayment });
 
       // set finish step
       state.currentStepCheckout = 99;
@@ -109,6 +117,10 @@ const slice = createSlice({
         "checkout-data-step",
         JSON.stringify({
           ...state,
+          ...data,
+          accountHolder: payload.accountHolder,
+          bankFrom: payload.bankFrom,
+          proofPayment: payload.proofPayment,
         })
       );
 
@@ -122,17 +134,17 @@ export const { handleStepOne, handleStepTwo } = slice.actions;
 export const CheckoutForm = slice.reducer;
 
 //
-interface CheckoutFormProps_stepOne {
+export type CheckoutFormProps_stepOne = {
   firstName: string;
   lastName: string;
   email: string;
   phone: number;
-}
-interface CheckoutFormProps_stepTwo {
+};
+export type CheckoutFormProps_stepTwo = {
   accountHolder: string;
   bankFrom: string;
-  proofPayment: string;
-}
+  proofPayment: string | File;
+};
 
 export interface CheckoutFormData
   extends CheckoutFormProps_stepOne,
