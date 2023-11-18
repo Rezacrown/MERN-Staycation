@@ -15,10 +15,10 @@ import { useSelector } from "react-redux";
 export default function FormDetail({
   price,
   unit,
-}: {
-  price: number;
-  unit: string;
-}) {
+  city,
+  country,
+  name,
+}: FormBookingDetailProps) {
   const navigate = useNavigate();
 
   const BookingForm = useSelector(
@@ -34,6 +34,9 @@ export default function FormDetail({
 
   const handleSubmit = async () => {
     const payload = {
+      name,
+      country,
+      city,
       duration: BookingForm.duration,
       price: price * BookingForm.duration,
       bookingDateStart: BookingForm.bookingDateStart,
@@ -102,6 +105,14 @@ export default function FormDetail({
       </Button>
     </div>
   );
+}
+
+interface FormBookingDetailProps {
+  name: string;
+  country: string;
+  city: string;
+  price: number;
+  unit: string;
 }
 
 export interface PayloadStateBookingFormDetail {

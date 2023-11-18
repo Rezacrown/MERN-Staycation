@@ -118,6 +118,8 @@ const slice = createSlice({
         JSON.stringify({
           ...state,
           ...data,
+          currentStepCheckout: 99,
+          succesStepCheckout: 2,
           accountHolder: payload.accountHolder,
           bankFrom: payload.bankFrom,
           proofPayment: payload.proofPayment,

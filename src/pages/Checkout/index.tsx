@@ -1,6 +1,7 @@
 import Brandicon from "@/components/BrandIcon";
 import Stepper from "@/components/Stepper";
 import Title_checkout from "./title";
+import { Fade } from "react-awesome-reveal";
 
 import Form_BookingInformation from "./form-bookingInformation";
 import Form_BookingPayment from "./form-bookingPayment";
@@ -72,6 +73,8 @@ export default function CheckoutPage() {
     if (!localStorage.getItem("properties-book")) {
       navigate("/");
     }
+    window.scroll(0, 0);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -83,24 +86,28 @@ export default function CheckoutPage() {
   //   if (step.currentStepCheckout == 2) {
   //     FormState[1]({
   //       ...FormState[0],
-  //       firstName
+  //       //   firstName
   //     });
   //   }
   // }, [dataCheckout, dispatch]);
 
+  // succes page
   if (
-    dataCheckout.currentStepCheckout > 99 ||
-    dataCheckout.succesStepCheckout > 2
+    dataCheckout.currentStepCheckout >= 99 &&
+    dataCheckout.succesStepCheckout >= 2
   ) {
+    //
     return (
       <>
-        <SuccesscheckoutPage />
+        <Fade triggerOnce direction="down">
+          <SuccesscheckoutPage />
+        </Fade>
       </>
     );
   }
 
   return (
-    <div>
+    <section>
       <Brandicon isCenter />
       <Stepper
         step={[1, 2]}
@@ -112,14 +119,16 @@ export default function CheckoutPage() {
       <div className="container mt-5">
         <div className="row justify-content-center">
           {/* side left book information */}
-          <div className="col-4">
-            {/* step 1 */}
-            {dataCheckout.currentStepCheckout == 1 && (
-              <Properties_Information />
-            )}
-            {/* step 2 */}
-            {dataCheckout.currentStepCheckout == 2 && <Payment_Information />}
-          </div>
+          <Fade className="col-4" triggerOnce direction="left">
+            <div className="">
+              {/* step 1 */}
+              {dataCheckout.currentStepCheckout == 1 && (
+                <Properties_Information />
+              )}
+              {/* step 2 */}
+              {dataCheckout.currentStepCheckout == 2 && <Payment_Information />}
+            </div>
+          </Fade>
           {/*  */}
           <div className="col-1" style={{ marginLeft: "120px" }}>
             <svg
@@ -133,23 +142,25 @@ export default function CheckoutPage() {
             </svg>
           </div>
           {/* side right | form input */}
-          <div className="col-4">
-            {/* step 1 */}
-            {dataCheckout.currentStepCheckout === 1 && (
-              <Form_BookingInformation
-                // FormState={FormState}
-                CheckoutInfo={FormState[0]}
-                setCheckoutInfo={FormState[1]}
-              />
-            )}
-            {/* step 2 */}
-            {dataCheckout.currentStepCheckout === 2 && (
-              <Form_BookingPayment
-                CheckoutInfo={FormState[0]}
-                setCheckoutInfo={FormState[1]}
-              />
-            )}
-          </div>
+          <Fade className="col-4" direction="right" triggerOnce>
+            <div className="">
+              {/* step 1 */}
+              {dataCheckout.currentStepCheckout === 1 && (
+                <Form_BookingInformation
+                  // FormState={FormState}
+                  CheckoutInfo={FormState[0]}
+                  setCheckoutInfo={FormState[1]}
+                />
+              )}
+              {/* step 2 */}
+              {dataCheckout.currentStepCheckout === 2 && (
+                <Form_BookingPayment
+                  CheckoutInfo={FormState[0]}
+                  setCheckoutInfo={FormState[1]}
+                />
+              )}
+            </div>
+          </Fade>
         </div>
       </div>
       {/* button section */}
@@ -214,6 +225,6 @@ export default function CheckoutPage() {
           </Button>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
