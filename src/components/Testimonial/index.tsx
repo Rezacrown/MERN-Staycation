@@ -6,6 +6,7 @@ import testimonialsFrame from "@/assets/image/img-hero-frame.jpg";
 import Button from "../Button";
 
 import { Fade } from "react-awesome-reveal";
+import { config } from "@/config";
 
 export default function Testimonial({ data }: { data: TestimonialProps }) {
   return (
@@ -18,7 +19,7 @@ export default function Testimonial({ data }: { data: TestimonialProps }) {
               style={{ margin: `30px 0 0 30px` }}
             >
               <img
-                src={data.imageUrl}
+                src={`${config.ApiUrl}${data.imageUrl}`}
                 alt={data.name}
                 className="position-absolute"
                 style={{ zIndex: 1 }}
@@ -50,7 +51,8 @@ export default function Testimonial({ data }: { data: TestimonialProps }) {
                 hasShandow
                 isPrimary
                 type="link"
-                href={`/testimonial/${data._id}`}
+                // href={`/testimonial/${data._id}`}
+                href="#"
               >
                 Read Their Story
               </Button>

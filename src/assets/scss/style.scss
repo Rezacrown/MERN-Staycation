@@ -115,6 +115,8 @@ section {
 
 .card {
     height: 100%;
+    border: 0px;
+    // border-radius: 15px;
 
     .tag {
         z-index: 3;
@@ -136,12 +138,14 @@ section {
     .img-wrapper {
         height: 100%;
         margin-bottom: 0;
-        border-radius: 0.9375;
+        // border-radius: 0.9375;
+        border-radius: 15px;
         overflow: hidden;
     }
 
     .meta-wrapper {
         margin-top: 1rem;
+        // margin-right: auto;
         h5 {
             font-size: 1.125rem;
             margin-bottom: 2px;
@@ -286,5 +290,3 @@ main {
         font-weight: 300;
     }
 }
-
-

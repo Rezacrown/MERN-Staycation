@@ -6,11 +6,42 @@ import Categories from "@/components/Categories";
 import Testimonial from "@/components/Testimonial";
 
 // mock
-import landingMock from "@/mock/landingPage.json";
+// import landingMock from "@/mock/landingPage.json";
 import { LandingPageProps } from "@/dto/landing.dto";
+
 import Footer from "@/components/Footer";
+import { useEffect, useState } from "react";
+import { getData } from "@/utils/fetch";
 
 export default function LandingPage({ props }: { props?: LandingPageProps }) {
+  const [data, setData] = useState<LandingPageProps>({
+    hero: {
+      cities: 0,
+      travelers: 0,
+      treasures: 0,
+    },
+    categories: [],
+    mostPicked: [],
+    testimonial: {},
+  });
+
+  useEffect(() => {
+    getData("/landing").then((res) => {
+      console.log({ res: res.category });
+
+      setData({
+        categories: res?.category,
+        hero: {
+          cities: res.hero.city,
+          travelers: res.hero.traveler,
+          treasures: res.hero.treasure,
+        },
+        mostPicked: res?.mostPicked,
+        testimonial: res?.testimonial,
+      });
+    });
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -18,10 +49,10 @@ export default function LandingPage({ props }: { props?: LandingPageProps }) {
       </Helmet>
       {/* body */}
       <Header pathname="/" {...props} />
-      <Hero data={landingMock.hero} />
-      <MostPicked data={landingMock.mostPicked} />
-      <Categories data={landingMock.categories} />
-      <Testimonial data={landingMock.testimonial} />
+      <Hero data={data!.hero} />
+      <MostPicked data={data.mostPicked} />
+      <Categories data={data.categories} />
+      <Testimonial data={data.testimonial} />
       <Footer />
     </>
   );

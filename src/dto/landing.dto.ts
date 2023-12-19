@@ -1,7 +1,7 @@
 export interface LandingPageProps {
   hero: HeroProps;
   mostPicked: MostPickedprops[];
-  categories: any;
+  categories: CategoriesProps[];
   testimonial: any;
 }
 
@@ -14,9 +14,14 @@ export interface HeroProps {
 
 export interface MostPickedprops {
   _id: string;
-  name: string;
+  title: string;
   type: string;
-  imageUrl: string;
+  imageId: [
+    {
+      _id: string;
+      imageUrl: string;
+    }
+  ];
   country: string;
   city: string;
   price: string;
@@ -26,16 +31,21 @@ export interface MostPickedprops {
 export interface CategoriesProps {
   _id: string;
   name: string;
-  items: items[];
+  itemId: items[];
 }
 
 interface items {
   _id: string;
-  name: string;
-  imageUrl: string | null;
+  title: string;
   country: string;
   city: string;
   isPopular: boolean;
+  imageId: [
+    {
+      _id: string;
+      imageUrl: string;
+    }
+  ];
 }
 
 export interface TestimonialProps {

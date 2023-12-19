@@ -2,6 +2,7 @@ import { MostPickedprops } from "@/dto/landing.dto";
 import Button from "../Button";
 
 import { Fade } from "react-awesome-reveal";
+import { config } from "@/config";
 
 interface CustomMostPickedProps {
   data: MostPickedprops[];
@@ -21,14 +22,14 @@ export default function MostPicked({ data }: CustomMostPickedProps) {
               <Fade delay={500 * i} direction="up" triggerOnce className="card">
                 <div className="card card-feature">
                   <div className="tag">
-                    {item.price}{" "}
+                    ${item.price}{" "}
                     <span className="fw-light">Per {item.unit}</span>
                   </div>
                   {/*  */}
                   <figure className="img-wrapper">
                     <img
-                      src={item.imageUrl}
-                      alt={item.name}
+                      src={`${config.ApiUrl}/uploads/item/${item.imageId[0].imageUrl}`}
+                      alt={item.title}
                       className="img-cover"
                     />
                   </figure>
@@ -39,7 +40,10 @@ export default function MostPicked({ data }: CustomMostPickedProps) {
                       href={`/properties/${item._id}`}
                       className="streched-link d-block text-white"
                     >
-                      <h5>{item.name}</h5>
+                      <h5>{item.title}</h5>
+                      <p className="">
+                        {item.city}, {item.country}{" "}
+                      </p>
                     </Button>
                   </div>
                 </div>
