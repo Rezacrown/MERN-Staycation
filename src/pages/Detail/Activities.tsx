@@ -1,3 +1,4 @@
+import { config } from "@/config";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
 
@@ -27,7 +28,7 @@ export default function Activities({ data }: { data?: ActivitiesProps[] }) {
                     )}
                     <figure className="img-wrapper" style={{ height: 180 }}>
                       <img
-                        src={item.imageUrl ? `${item.imageUrl}` : ""}
+                        src={`${config.ApiUrl}/uploads/activity/${item.imageUrl}`}
                         alt={item.name}
                         className="img-cover"
                       />
@@ -35,7 +36,8 @@ export default function Activities({ data }: { data?: ActivitiesProps[] }) {
                     <div className="meta-wrapper">
                       <Link
                         type="link"
-                        to={`/properties/${item._id}`}
+                        // to={`/properties/${item._id}`}
+                        to={"#"}
                         className="stretched-link d-block text-gray-800 text-decoration-none"
                       >
                         <h5 className="h4" style={{ color: "#152C5B" }}>

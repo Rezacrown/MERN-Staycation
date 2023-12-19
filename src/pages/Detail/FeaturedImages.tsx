@@ -1,3 +1,4 @@
+import { config } from "@/config";
 import { Fade } from "react-awesome-reveal";
 
 interface FeaturedImagesProps {
@@ -6,7 +7,7 @@ interface FeaturedImagesProps {
 
 type itemProps = {
   _id: string;
-  url: string;
+  imageUrl: string;
 };
 
 export default function FeaturedImages({ imageUrls }: FeaturedImagesProps) {
@@ -26,7 +27,7 @@ export default function FeaturedImages({ imageUrls }: FeaturedImagesProps) {
                   <figure className="img-wrapper">
                     <img
                       className="img-cover"
-                      src={`${item.url}`}
+                      src={`${config.ApiUrl}/uploads/item/${item.imageUrl}`}
                       alt={item._id}
                     />
                   </figure>

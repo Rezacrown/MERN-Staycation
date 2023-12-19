@@ -26,9 +26,7 @@ export default function LandingPage({ props }: { props?: LandingPageProps }) {
   });
 
   useEffect(() => {
-    getData("/landing").then((res) => {
-      console.log({ res: res.category });
-
+    getData("/landing").then((res: any) => {
       setData({
         categories: res?.category,
         hero: {

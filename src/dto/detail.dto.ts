@@ -5,11 +5,11 @@ export interface DetailPageProps {
   country: string;
   city: string;
   price: string;
-  unit: number;
+  unit: string;
   isPopular: boolean;
   hasBackyard: boolean;
   description: string;
-  imageUrls: imageUrls[];
+  imageId: imageUrls[];
   features: features[];
   activities: activities[];
   categories: categories[];
@@ -19,7 +19,7 @@ export interface DetailPageProps {
 //
 type imageUrls = {
   _id: string;
-  url: string;
+  imageUrl: string;
 };
 
 //
@@ -53,7 +53,7 @@ type items = {
   isPopular: boolean;
 };
 
-// 
+//
 type testimonial = {
   _id: string;
   imageUrl: string;

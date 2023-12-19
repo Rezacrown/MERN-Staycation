@@ -12,6 +12,7 @@ type FeatuedItem = {
   qty: string;
 };
 
+import { config } from "@/config";
 import ReactHtmlParser from "react-html-parser";
 export default function DetailDescription({
   description,
@@ -36,7 +37,7 @@ export default function DetailDescription({
                   <img
                     width="38"
                     className="d-block mb-2"
-                    src={`${feature.imageUrl}`}
+                    src={`${config.ApiUrl}/uploads/feature/${feature.imageUrl}`}
                     alt={feature.name}
                   />{" "}
                   <span>{feature.qty}</span>{" "}

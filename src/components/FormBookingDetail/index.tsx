@@ -55,7 +55,7 @@ export default function FormDetail({
       <div className="title-booking">
         <h5>Start Booking</h5>
         <h2>
-          <span>$280</span> per night{" "}
+          <span>${price}</span> per night{" "}
         </h2>
       </div>
       {/* number input */}
@@ -64,7 +64,7 @@ export default function FormDetail({
           How long you will stay?
         </h5>
         <InputNumber
-          max={10}
+          max={360}
           min={1}
           prefix=""
           suffix={` Night`}

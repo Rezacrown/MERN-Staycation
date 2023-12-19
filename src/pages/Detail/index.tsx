@@ -13,12 +13,66 @@ import Activities from "./Activities";
 import { Fade } from "react-awesome-reveal";
 import { Helmet } from "react-helmet";
 //
-// import { DetailPageProps } from "@/dto/detail.dto";
-import { useEffect } from "react";
-import DetailMock from "@/mock/itemDetails.json";
+import { useEffect, useState } from "react";
+// import DetailMock from "@/mock/itemDetails.json";
+import { useParams } from "react-router-dom";
+import { getData } from "@/utils/fetch";
+import { DetailPageProps } from "@/dto/detail.dto";
 
 export default function DetailPage() {
-  useEffect(() => {}, []);
+  const { id } = useParams();
+
+  // console.log({ id });
+
+  const [data, setData] = useState<DetailPageProps>({
+    _id: "",
+    activities: [],
+    categories: [],
+    city: "",
+    country: "",
+    description: "",
+    features: [],
+    hasBackyard: false,
+    imageId: [],
+    isPopular: false,
+    name: "",
+    price: "",
+    testimonial: {
+      _id: "",
+      content: "",
+      familyName: "",
+      familyOccupation: "",
+      imageUrl: "",
+      name: "",
+      rate: 0,
+    },
+    type: "",
+    unit: "night",
+  });
+
+  useEffect(() => {
+    getData(`/landing/${id}`).then((res: any) => {
+      // console.log({ res: res.city });
+
+      setData({
+        _id: res._id,
+        name: res.title,
+        city: res.city,
+        country: res.country,
+        price: res.price,
+        isPopular: res.isPopular,
+        unit: res.unit,
+        description: res.description,
+        categories: [],
+        activities: res.activityId,
+        features: res.featureId,
+        imageId: res.imageId,
+        hasBackyard: false,
+        testimonial: res.testimonial,
+        type: res.type,
+      });
+    });
+  }, [id]);
 
   return (
     <>
@@ -28,30 +82,30 @@ export default function DetailPage() {
       {/* body */}
       <Header />
       <Title_detail
-        city={DetailMock.city}
-        country={DetailMock.country}
-        title={DetailMock.name}
+        city={data!.city}
+        country={data!.country}
+        title={data!.name}
       />
-      <FeaturedImages imageUrls={DetailMock.imageUrls} />
+      <FeaturedImages imageUrls={data!.imageId} />
       {/* form booking */}
       <section className="container">
         <div className="row">
           <div className="col-7 pr-5">
             <Fade direction="down" triggerOnce>
               <DetailDescription
-                description={DetailMock.description}
-                features={DetailMock.features}
+                description={data!.description}
+                features={data!.features}
               />
             </Fade>
           </div>
           <div className="col-5">
             <Fade direction="down" triggerOnce>
               <FormBookingDetail
-                name={DetailMock.name}
-                country={DetailMock.country}
-                city={DetailMock.city}
-                price={Number(DetailMock.price)}
-                unit={DetailMock.unit}
+                name={data!.name}
+                country={data!.country}
+                city={data!.city}
+                price={Number(data!.price)}
+                unit={data!.unit}
                 // itemDetails={page[match.params.id]}
                 // startBooking={this.props.checkoutBooking}
               />
@@ -59,9 +113,9 @@ export default function DetailPage() {
           </div>
         </div>
       </section>
-      <Activities data={DetailMock.activities} />
-      {/* <Categories data={DetailMock.categories} /> */}
-      <Testimonial data={DetailMock.testimonial} />
+      <Activities data={data!.activities} />
+      {/* <Categories data={data!.categories} /> */}
+      <Testimonial data={data!.testimonial} />
       <Footer />
     </>
   );
