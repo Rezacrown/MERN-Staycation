@@ -16,3 +16,21 @@ export const getData = async (url: string, token?: string | object) => {
     console.log(error);
   }
 };
+
+export const postData = async (
+  url: string,
+  payload: object,
+  token?: string | object
+) => {
+  try {
+    const response = await axios.post(`${config.ApiUrl}/api${url}`, payload, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

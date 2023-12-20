@@ -18,6 +18,8 @@ export default function FormDetail({
   city,
   country,
   name,
+  imageUrl,
+  itemId,
 }: FormBookingDetailProps) {
   const navigate = useNavigate();
 
@@ -33,6 +35,7 @@ export default function FormDetail({
   };
 
   const handleSubmit = async () => {
+    // set payload data to save localstorage
     const payload = {
       name,
       country,
@@ -41,6 +44,8 @@ export default function FormDetail({
       price: price * BookingForm.duration,
       bookingDateStart: BookingForm.bookingDateStart,
       bookingDateEnd: BookingForm.bookingDateEnd,
+      imageUrl,
+      itemId,
     };
 
     // set data for next step
@@ -64,7 +69,7 @@ export default function FormDetail({
           How long you will stay?
         </h5>
         <InputNumber
-          max={360}
+          max={30}
           min={1}
           prefix=""
           suffix={` Night`}
@@ -113,6 +118,8 @@ interface FormBookingDetailProps {
   city: string;
   price: number;
   unit: string;
+  imageUrl: string;
+  itemId: string;
 }
 
 export interface PayloadStateBookingFormDetail {

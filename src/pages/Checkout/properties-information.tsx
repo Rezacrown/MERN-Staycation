@@ -1,3 +1,4 @@
+import { config } from "@/config";
 import { useEffect, useState } from "react";
 
 export default function Properties_Information() {
@@ -7,6 +8,7 @@ export default function Properties_Information() {
     city: "",
     duration: "",
     price: "",
+    imageUrl: "",
   });
 
   useEffect(() => {
@@ -14,6 +16,7 @@ export default function Properties_Information() {
       localStorage.getItem("properties-book")
         ? JSON.parse(localStorage.getItem("properties-book")!)
         : {};
+
     // setdata for show users
     setInformation({
       ...information,
@@ -22,13 +25,19 @@ export default function Properties_Information() {
       city: propertiesInformation.city,
       duration: String(propertiesInformation.duration),
       price: String(propertiesInformation.price),
+      imageUrl: propertiesInformation.imageUrl,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div data-id="properties-information" className="">
-      <img src="/image/img-categories-1.jpg" width={420} height={270} alt="" />
+      <img
+        src={`${config.ApiUrl}/uploads/item/${information.imageUrl}`}
+        width={420}
+        height={270}
+        alt=""
+      />
       <div className="mt-3 d-flex justify-content-between">
         <div className="">
           <h4 style={{ fontSize: 20, color: "#152C5B" }}>{information.name}</h4>
@@ -65,4 +74,5 @@ interface PropertiesInformation_localStorage {
   city: string;
   price: number;
   duration: number;
+  imageUrl: string;
 }

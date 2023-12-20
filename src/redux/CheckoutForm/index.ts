@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { PayloadStateBookingFormDetail } from "../DetailBookingForm";
+// import { postData } from "@/utils/fetch";
 
 const slice = createSlice({
   name: "checkoutForm",
@@ -17,6 +18,7 @@ const slice = createSlice({
     proofPayment: "" as string | File,
 
     // from localstorage
+    itemId: "",
     duration: "",
     price: "",
     bookingDateStart: "",
@@ -47,21 +49,11 @@ const slice = createSlice({
       state.price = String(data.price);
       state.bookingDateStart = String(data.bookingDateStart);
       state.bookingDateEnd = String(data.bookingDateEnd);
+      state.itemId = data.itemId;
 
       // set for next step
       state.currentStepCheckout = 2;
       state.succesStepCheckout = 1;
-
-      //
-      // firstName:
-      //       payload.firstName.length > 2 ? String(payload.firstName) : "",
-      //     lastName: payload.lastName.length > 2 ? String(payload.lastName) : "",
-      //     emailAddress: payload.email ? String(payload.email) : "",
-      //     phoneNumber:
-      //       String(payload.phone).length >= 9 &&
-      //       String(payload.phone).length <= 16
-      //         ? String(payload.phone)
-      //         : "",
 
       // set data from payload step 1
       localStorage.setItem(
@@ -77,6 +69,7 @@ const slice = createSlice({
 
       return state;
     },
+
     handleStepTwo: (
       state,
       { payload }: { payload: CheckoutFormProps_stepTwo }
@@ -87,20 +80,6 @@ const slice = createSlice({
       )
         ? JSON.parse(localStorage.getItem("checkout-data-step")!)
         : {};
-
-      // check data localstorage is valid
-      // if (
-      //   Object.keys(data).length < 4 ||
-      //   Object.values(data).length < 4 ||
-      //   Object.values(data).includes(null || "")
-      // ) {
-      //   throw new Error("properties data not found");
-      // }
-
-      // check previus step data
-      // Object.values(data).forEach((val) => {
-      //   if (val == "") throw new Error("some data missing");
-      // });
 
       // set state
       state.accountHolder = payload.accountHolder;
@@ -128,10 +107,21 @@ const slice = createSlice({
 
       return state;
     },
+
+    getDataForPostCheckout: (state) => {
+      return state;
+    },
   },
+
+  // extraReducers({ addCase }) {
+  //   const postCheckout = async () => {
+  //     return "";
+  //   };
+  // },
 });
 
-export const { handleStepOne, handleStepTwo } = slice.actions;
+export const { handleStepOne, handleStepTwo, getDataForPostCheckout } =
+  slice.actions;
 
 export const CheckoutForm = slice.reducer;
 
@@ -142,6 +132,7 @@ export type CheckoutFormProps_stepOne = {
   email: string;
   phone: number;
 };
+
 export type CheckoutFormProps_stepTwo = {
   accountHolder: string;
   bankFrom: string;
@@ -157,4 +148,7 @@ export interface CheckoutFormData
   price: string;
   bookingDateStart: string;
   bookingDateEnd: string;
+  itemId: string;
+
+  imageUrl?: string;
 }

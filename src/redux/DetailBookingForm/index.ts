@@ -37,10 +37,21 @@ const slice = createSlice({
 
       return state;
     },
+    resetBookingData: (state) => {
+      state = {
+        duration: 1,
+        price: 0,
+        bookingDateStart: moment(new Date()).format("DD MMMM YYYY, h:mm:ss a"),
+        bookingDateEnd: moment(getTomorow()).format("DD MMMM YYYY, h:mm:ss a"),
+      };
+      localStorage.clear();
+
+      return state;
+    },
   },
 });
 
-export const { handleChangeBooking } = slice.actions;
+export const { handleChangeBooking, resetBookingData } = slice.actions;
 
 export const FormBookingData = slice.reducer;
 
@@ -50,6 +61,8 @@ export interface PayloadStateBookingFormDetail {
   price: number; // in us Dollars
   bookingDateStart: Date;
   bookingDateEnd: Date;
+
+  itemId: string;
 }
 
 // funct

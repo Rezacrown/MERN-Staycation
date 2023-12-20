@@ -12,17 +12,25 @@ import Button from "@/components/Button";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { postData } from "@/utils/fetch";
+// import { resetBookingData } from "@/redux/DetailBookingForm";
+
 import { useSelector, useDispatch } from "react-redux";
 import {
   handleStepOne,
   CheckoutFormData,
   handleStepTwo,
+  // getDataForPostCheckout,
 } from "@/redux/CheckoutForm";
+
 import SuccesscheckoutPage from "../Success/checkout";
+import moment from "moment";
+
 ("../../redux/CheckoutForm/index");
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
+  const [itemId, setItemId] = useState("");
   const FormState = useState({
     firstName: "",
     lastName: "",
@@ -61,9 +69,39 @@ export default function CheckoutPage() {
               proofPayment: String(FormState[0].proofPayment),
             })
           );
-          // navigate("/checkout-success");
+
+          // manipulasi date time nya agar bisa diterima di backend
+          const dateStart = moment(
+            new Date(dataCheckout.bookingDateStart)
+          ).format("YYYY-MM-DDTHH:mm:ssZ");
+
+          const dateEnd = moment(new Date(dataCheckout.bookingDateEnd)).format(
+            "YYYY-MM-DDTHH:mm:ssZ"
+          );
+
+          const payload = new FormData();
+          payload.append("itemId", itemId);
+          payload.append("duration", String(dataCheckout.duration));
+          payload.append("bookingStartDate", String(dateStart));
+          payload.append("bookingEndDate", String(dateEnd));
+
+          payload.append("proofPayment", FormState[0].proofPayment);
+          payload.append("firstName", FormState[0].firstName);
+          payload.append("lastName", FormState[0].lastName);
+          payload.append("email", FormState[0].email);
+          payload.append("phoneNumber", FormState[0].phone);
+          payload.append("accountHolder", FormState[0].accountHolder);
+          payload.append("bankFrom", FormState[0].bankFrom);
+
+          postData("/booking", payload).then(() => {
+            localStorage.clear();
+            setTimeout(() => {
+              navigate("/");
+            }, 8000);
+            // console.log({ success: res });
+          });
         } catch (error) {
-          console.log(error);
+          console.log({ errorcheckoutPage: error });
         }
     }
   };
@@ -73,23 +111,16 @@ export default function CheckoutPage() {
     if (!localStorage.getItem("properties-book")) {
       navigate("/");
     }
+
+    const propertiesData: CheckoutFormData =
+      JSON.parse(localStorage.getItem("properties-book")!) || {};
+
+    setItemId(propertiesData.itemId);
+
     window.scroll(0, 0);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // useEffect(() => {
-  //   const step: CheckoutFormData = localStorage.getItem("checkout-data-step")
-  //     ? JSON.parse(localStorage.getItem("checkout-data-step")!)
-  //     : {};
-
-  //   if (step.currentStepCheckout == 2) {
-  //     FormState[1]({
-  //       ...FormState[0],
-  //       //   firstName
-  //     });
-  //   }
-  // }, [dataCheckout, dispatch]);
 
   // succes page
   if (

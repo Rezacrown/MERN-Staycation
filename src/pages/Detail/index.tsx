@@ -26,6 +26,12 @@ export default function DetailPage() {
 
   const [data, setData] = useState<DetailPageProps>({
     _id: "",
+    imageId: [
+      {
+        _id: "",
+        imageUrl: "",
+      },
+    ],
     activities: [],
     categories: [],
     city: "",
@@ -33,7 +39,6 @@ export default function DetailPage() {
     description: "",
     features: [],
     hasBackyard: false,
-    imageId: [],
     isPopular: false,
     name: "",
     price: "",
@@ -52,7 +57,7 @@ export default function DetailPage() {
 
   useEffect(() => {
     getData(`/landing/${id}`).then((res: any) => {
-      // console.log({ res: res.city });
+      // console.log({ res: res.imageId[0].imageUrl });
 
       setData({
         _id: res._id,
@@ -101,6 +106,8 @@ export default function DetailPage() {
           <div className="col-5">
             <Fade direction="down" triggerOnce>
               <FormBookingDetail
+                itemId={data._id}
+                imageUrl={data.imageId[0].imageUrl}
                 name={data!.name}
                 country={data!.country}
                 city={data!.city}

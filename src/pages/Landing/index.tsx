@@ -13,7 +13,12 @@ import Footer from "@/components/Footer";
 import { useEffect, useState } from "react";
 import { getData } from "@/utils/fetch";
 
+import { resetBookingData } from "@/redux/DetailBookingForm";
+import { useDispatch } from "react-redux";
+
 export default function LandingPage({ props }: { props?: LandingPageProps }) {
+  const dispatch = useDispatch();
+
   const [data, setData] = useState<LandingPageProps>({
     hero: {
       cities: 0,
@@ -26,6 +31,8 @@ export default function LandingPage({ props }: { props?: LandingPageProps }) {
   });
 
   useEffect(() => {
+    dispatch(resetBookingData());
+
     getData("/landing").then((res: any) => {
       setData({
         categories: res?.category,

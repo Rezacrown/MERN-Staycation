@@ -1,4 +1,26 @@
+import { useEffect, useState } from "react";
+
 export default function Payment_Information() {
+  const [information, setInformation] = useState({
+    subTotalPrice: "",
+    totalPrice: "",
+  });
+
+  useEffect(() => {
+    const itemInformation: PaymentInformation_localStorage =
+      localStorage.getItem("properties-book")
+        ? JSON.parse(localStorage.getItem("properties-book")!)
+        : {};
+
+    setInformation({
+      ...itemInformation,
+      subTotalPrice: String(itemInformation.price),
+      totalPrice: String(
+        itemInformation.price + itemInformation.price * (10 / 100)
+      ),
+    });
+  }, []);
+
   return (
     <section>
       {/* pay informartion */}
@@ -10,10 +32,12 @@ export default function Payment_Information() {
           Tax: <span className="fw-normal">10%</span>
         </h5>
         <h5 className="" style={{ color: "#152C5B", fontSize: "16px" }}>
-          Subtotal: <span className="fw-normal">$480 usd</span>
+          Subtotal:{" "}
+          <span className="fw-normal">${information.subTotalPrice} usd</span>
         </h5>
         <h5 className="" style={{ color: "#152C5B", fontSize: "16px" }}>
-          Total: <span className="fw-normal">$480 usd</span>
+          Total:{" "}
+          <span className="fw-normal">${information.totalPrice} usd</span>
         </h5>
       </div>
       {/* bank */}
@@ -30,7 +54,7 @@ export default function Payment_Information() {
               2208 1996
             </h5>
             <h5 className="" style={{ color: "#152C5B", fontSize: "16px" }}>
-              BuildWith Angga
+              Hartono
             </h5>
           </div>
         </div>
@@ -43,14 +67,20 @@ export default function Payment_Information() {
               Bank Mandiri
             </h5>
             <h5 className="" style={{ color: "#152C5B", fontSize: "16px" }}>
-              2208 1996
+              2206 2046
             </h5>
             <h5 className="" style={{ color: "#152C5B", fontSize: "16px" }}>
-              BuildWith Angga
+              Arif
             </h5>
           </div>
         </div>
       </div>
     </section>
   );
+}
+
+interface PaymentInformation_localStorage {
+  price: number;
+  subTotalPrice: string;
+  totalPrice: string;
 }
