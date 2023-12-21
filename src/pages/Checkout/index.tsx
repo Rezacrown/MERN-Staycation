@@ -25,6 +25,7 @@ import {
 
 import SuccesscheckoutPage from "../Success/checkout";
 import moment from "moment";
+import { toast } from "react-toastify";
 
 ("../../redux/CheckoutForm/index");
 
@@ -95,13 +96,15 @@ export default function CheckoutPage() {
 
           postData("/booking", payload).then(() => {
             localStorage.clear();
+            toast.success("sukses Checkout");
             setTimeout(() => {
               navigate("/");
             }, 8000);
             // console.log({ success: res });
           });
         } catch (error) {
-          console.log({ errorcheckoutPage: error });
+          // console.log({ errorcheckoutPage: error });
+          console.log(error);
         }
     }
   };

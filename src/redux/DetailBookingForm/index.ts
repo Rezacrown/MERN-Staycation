@@ -17,23 +17,65 @@ const slice = createSlice({
     ) => {
       const { duration, price, bookingDateStart, bookingDateEnd } = payload;
 
-      state.price = price * Number(duration);
+      let _bookingStartDate = moment(bookingDateStart).format(
+        "DD MMMM YYYY, h:mm:ss a"
+      );
+      let _bookingEndDate = moment(bookingDateEnd).format(
+        "DD MMMM YYYY, h:mm:ss a"
+      );
 
-      // state.duration = duration;
-      // state.duration = bookingDateEnd.getDate() - bookingDateStart.getDate() + 1; // +1 karena dihitung per night
-      state.duration =
+      // check calcutaion duration date if have minus calculation
+      let __duration =
         moment(bookingDateEnd).date() - moment(bookingDateStart).date();
 
-      // console.log(bookingDateStart);
-      // console.log(bookingDateEnd);
-      // state.bookingDateStart = formatDate(bookingDateStart);
-      // state.bookingDateEnd = formatDate(bookingDateEnd);
-      (state.bookingDateStart = moment(bookingDateStart).format(
-        "DD MMMM YYYY, h:mm:ss a"
-      )),
-        (state.bookingDateEnd = moment(bookingDateEnd).format(
-          "DD MMMM YYYY, h:mm:ss a"
-        ));
+      //
+      if (String(__duration)[0] === "-") {
+        // get full years
+        const start = moment(bookingDateStart).format("DD MM YYYY").split(" ");
+        const end = moment(bookingDateEnd).format("DD MM YYYY").split(" ");
+        // get date
+        let startDate = Number(start[0]);
+        let endDate = Number(end[0]);
+        // get month
+        let startMonth = Number(start[1]);
+        let endMonth = Number(end[1]);
+
+        // calculate date in month
+        let Xstart = 28 - startDate; // deafult for febuari
+
+        if (endMonth == 4 || endMonth == 6 || endMonth == 9 || endMonth == 11) {
+          Xstart = 30 - startDate;
+        } // for 30 days in month
+
+        if (
+          endMonth == 1 ||
+          endMonth == 3 ||
+          endMonth == 5 ||
+          endMonth == 7 ||
+          endMonth == 8 ||
+          endMonth == 10 ||
+          endMonth == 12
+        ) {
+          Xstart = 31 - startDate;
+        } // for 31 days in month
+
+        if (startMonth == 12 && endMonth == 1 && endDate == 1) {
+          // _bookingStartDate =
+          // _bookingEndDate =
+          console.log("data masuk", { _bookingEndDate });
+        }
+
+        __duration = Xstart + endDate;
+        console.log({ _newDur: __duration });
+      }
+
+      // set data
+      state.duration = __duration;
+
+      state.price = price * Number(duration);
+
+      state.bookingDateStart = _bookingStartDate;
+      state.bookingDateEnd = _bookingEndDate;
 
       return state;
     },

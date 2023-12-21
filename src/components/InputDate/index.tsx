@@ -26,6 +26,7 @@ export default function InputDate({
 }: // setPayload,
 InputDateProps) {
   const dispatch = useDispatch();
+
   const BookingPayload = useSelector(
     (state: any) => state.BookingForm
   ) as PayloadStateBookingFormDetail;

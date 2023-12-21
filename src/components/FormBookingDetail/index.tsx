@@ -69,7 +69,7 @@ export default function FormDetail({
           How long you will stay?
         </h5>
         <InputNumber
-          max={30}
+          max={360}
           min={1}
           prefix=""
           suffix={` Night`}

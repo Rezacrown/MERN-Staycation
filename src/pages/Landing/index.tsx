@@ -45,6 +45,8 @@ export default function LandingPage({ props }: { props?: LandingPageProps }) {
         testimonial: res?.testimonial,
       });
     });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

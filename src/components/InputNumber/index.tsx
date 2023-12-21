@@ -94,7 +94,28 @@ export default function InputNumber({
   };
   const handleMinus = (value: number) => {
     if (value > min) {
+      // const start = moment(BookingPayload.bookingDateStart)
+      //   .format("DD MM YYYY")
+      //   .split(" ");
+      // const end = moment(BookingPayload.bookingDateEnd)
+      //   .format("DD MM YYYY")
+      //   .split(" ");
+
+      // console.log({ startMinus: start });
+      // console.log({ endMinus: end });
+
+      // if (
+      //   end[0] == "01" &&
+      //   end[1] == "01" &&
+      //   start[1] == "12" &&
+      //   31 - Number(start[0]) > Number(end[0])
+      // ) {
+      //   // changeDisplayInput(value - 1, "minus");
+      //   changeDisplayInput(31 - Number(start[0]) - 1, "minus");
+      //   console.log("sudah masuk includes end nya");
+      // } else {
       changeDisplayInput(value - 1, "minus");
+      // }
     }
   };
 

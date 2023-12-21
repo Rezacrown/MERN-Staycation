@@ -1,3 +1,6 @@
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import "./assets/scss/style.scss";
 // import "react-bootstrap";
 // import "bootstrap/dist/css/bootstrap.min.css";
@@ -19,6 +22,7 @@ function App() {
           <Route path="/checkout-success" Component={SuccesscheckoutPage} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </>
   );
 }
